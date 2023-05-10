@@ -1,17 +1,18 @@
 from flask import Flask, make_response, Response
 from flask_cors import CORS
 from flask_migrate import Migrate
+from werkzeug.exceptions import HTTPException
+import logging
 from utils.config import Config
 from utils.database import db
+from utils.tokenize import jwt
 from api.users import user_route
 from exceptions.Client import ClientError
-from werkzeug.exceptions import HTTPException
-from sqlalchemy.exc import IntegrityError
-import logging
 
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
+jwt.init_app(app)
 migrate = Migrate(app, db)
 
 CORS(app)

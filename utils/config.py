@@ -16,3 +16,5 @@ class Config:
         + "/"
         + os.getenv("DB_NAME")
     )
+
+    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")

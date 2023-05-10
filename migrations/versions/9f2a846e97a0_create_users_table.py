@@ -23,7 +23,7 @@ def upgrade():
         sa.Column("id", sa.String(length=21), nullable=False),
         sa.Column("name", sa.String(length=255), nullable=False),
         sa.Column("username", sa.String(length=20), nullable=False),
-        sa.Column("password", sa.String(length=64), nullable=False),
+        sa.Column("password", sa.String(length=102), nullable=False),
         sa.Column("email", sa.String(length=120), nullable=False),
         sa.Column("phone", sa.String(length=13), nullable=False),
         sa.Column("picture", sa.String(length=255), nullable=True),

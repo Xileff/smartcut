@@ -2,7 +2,10 @@ from nanoid import generate
 from models.User import User
 from sqlalchemy import or_
 from exceptions.Client import ClientError
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import create_access_token, decode_token
 import datetime
+from datetime import timedelta
 
 
 def add_user(data: dict):
@@ -26,14 +29,14 @@ def add_user(data: dict):
             409,
         )
 
-    id = generate(size=16)
+    id = "user-" + generate(size=16)
     dateJoined = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     user = User(
         id=id,
         name=name,
         username=username,
-        password=password,
+        password=generate_password_hash(password),
         email=email,
         phone=phone,
         date_joined=dateJoined,
@@ -43,5 +46,13 @@ def add_user(data: dict):
     return id
 
 
-def add_profile_picture():
-    return
+def login(data: dict):
+    username, password = data.values()
+    user = User.query.filter_by(username=username).first()
+
+    if user and check_password_hash(user.password, password):
+        return create_access_token(
+            identity=user.id, expires_delta=timedelta(minutes=30)
+        )
+
+    raise ClientError("Gagal login. Username atau password salah", 401)

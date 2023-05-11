@@ -11,6 +11,8 @@ class User(db.Model):
     phone = db.Column(db.String(13), unique=True, nullable=False)
     picture = db.Column(db.String(255), nullable=True, default=None)
     date_joined = db.Column(db.DateTime, nullable=False)
+    is_email_verified = db.Column(db.Boolean(), nullable=False, server_default="0")
+    is_barber = db.Column(db.Boolean(), nullable=False, server_default="0")
 
     def __repr__(self):
         return "<Book %r>" & self.name

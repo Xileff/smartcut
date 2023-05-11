@@ -1,5 +1,6 @@
 from flask import Blueprint, request, make_response
 from flask_jwt_extended import jwt_required, get_jwt, get_jwt_identity
+from werkzeug.exceptions import Forbidden
 from services.UsersService import *
 
 user_route = Blueprint("user_route", __name__)
@@ -40,7 +41,7 @@ def login_user_handler():
 def edit_user_handler(id):
     jwt_user_id = get_jwt_identity()
     if jwt_user_id != id:
-        return make_response({"status": "fail", "message": "Unauthorized access"}, 401)
+        raise Forbidden("Forbidden access")
 
     # data = request.get_json() # todo edit profile
 

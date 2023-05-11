@@ -1,9 +1,9 @@
 from nanoid import generate
 from models.User import User
 from sqlalchemy import or_
-from exceptions.Client import ClientError
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import create_access_token, decode_token
+from werkzeug.exceptions import BadRequest, Unauthorized, Conflict
+from flask_jwt_extended import create_access_token
 import datetime
 from datetime import timedelta
 
@@ -12,9 +12,8 @@ def add_user(data: dict):
     required_keys = ["name", "username", "password", "email", "phone"]
 
     if not all(key in data for key in required_keys):
-        raise ClientError(
-            "Gagal menambahkan user. Mohon lengkapi nama, username, password, email dan nomor telepon",
-            400,
+        raise BadRequest(
+            "Gagal menambahkan user. Mohon lengkapi nama, username, password, email dan nomor telepon"
         )
 
     name, username, password, email, phone = data.values()
@@ -24,9 +23,8 @@ def add_user(data: dict):
     ).first()
 
     if existing_user:
-        raise ClientError(
-            "Gagal menambahkan user. Username, email, atau nomor telepon sudah dipakai.",
-            409,
+        raise Conflict(
+            "Gagal menambahkan user. Username, email, atau nomor telepon sudah dipakai."
         )
 
     id = "user-" + generate(size=16)
@@ -40,6 +38,8 @@ def add_user(data: dict):
         email=email,
         phone=phone,
         date_joined=dateJoined,
+        is_email_verified=False,
+        is_barber=False,
     )
 
     user.save()
@@ -55,4 +55,4 @@ def login(data: dict):
             identity=user.id, expires_delta=timedelta(minutes=30)
         )
 
-    raise ClientError("Gagal login. Username atau password salah", 401)
+    raise Unauthorized("Gagal login. Username atau password salah")

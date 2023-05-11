@@ -56,3 +56,22 @@ def login(data: dict):
         )
 
     raise Unauthorized("Gagal login. Username atau password salah")
+
+
+def get_profile_by_id(id: str):
+    user = User.query.filter_by(id=id).first()
+    return user.serialize()
+
+
+def edit_profile_by_id(id: str, data: dict):
+    name, email, phone = data.values()
+
+    if any([name == "", email == "", phone == ""]):
+        raise BadRequest("Name, email, and phone are required")
+
+    user = User.query.filter_by(id=id).first()
+    user.name = name
+    user.email = email
+    user.phone = phone
+
+    user.save()

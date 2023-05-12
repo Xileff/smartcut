@@ -52,3 +52,16 @@ def put_user_by_id_handler(id):
 def get_user_by_id_handler(id):
     user = get_profile_by_id(id)
     return make_response({"status": "success", "data": {"user": user}})
+
+
+@user_route.route("/users/<string:id>/profile-picture", methods=["PUT"])
+def put_user_profile_picture_by_id_handler(id):
+    picture = request.files["picture"]
+    picture_url = upload_profile_picture_by_id(id, picture)
+    return make_response(
+        {
+            "status": "success",
+            "message": "Profile picture uploaded succesfully.",
+            "data": {"picture_url": picture_url},
+        }
+    )

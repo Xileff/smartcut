@@ -2,10 +2,12 @@ from nanoid import generate
 from models.User import User
 from sqlalchemy import or_
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.exceptions import BadRequest, Unauthorized, Conflict
+from werkzeug.exceptions import BadRequest, Unauthorized, Conflict, NotFound
 from flask_jwt_extended import create_access_token
 import datetime
 from datetime import timedelta
+from utils.storage import bucket
+import os
 
 
 def add_user(data: dict):
@@ -70,8 +72,39 @@ def edit_profile_by_id(id: str, data: dict):
         raise BadRequest("Name, email, and phone are required")
 
     user = User.query.filter_by(id=id).first()
+
+    if not user:
+        raise NotFound("User not found")
+
     user.name = name
     user.email = email
     user.phone = phone
 
     user.save()
+
+
+def upload_profile_picture_by_id(id, picture):
+    user: User = User.query.filter_by(id=id).first()
+    if not user:
+        raise NotFound("User not found")
+
+    picture_ext = picture.filename.split(".")[-1]
+    if picture_ext not in ["jpg", "jpeg", "png"]:
+        raise BadRequest("Image format must be jpg or jpeg or png")
+
+    storage_path = os.getenv("USER_PROFILE_PICTURE_PATH")
+
+    if user.picture:
+        previous_picture_name = user.picture.split("/")[-1]
+        storage_reference = bucket.blob(storage_path + previous_picture_name)
+        storage_reference.delete()
+
+    picture.filename = user.id + "." + picture_ext
+    storage_reference = bucket.blob(storage_path + picture.filename)
+    storage_reference.upload_from_file(picture, content_type="image")
+    public_url = storage_reference.public_url
+
+    user.picture = public_url
+    user.save()
+
+    return public_url

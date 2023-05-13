@@ -49,12 +49,14 @@ def put_user_by_id_handler(id):
 
 
 @user_route.route("/users/<string:id>", methods=["GET"])
+@jwt_required()
 def get_user_by_id_handler(id):
     user = get_profile_by_id(id)
     return make_response({"status": "success", "data": {"user": user}})
 
 
 @user_route.route("/users/<string:id>/profile-picture", methods=["PUT"])
+@jwt_required()
 def put_user_profile_picture_by_id_handler(id):
     picture = request.files["picture"]
     picture_url = upload_profile_picture_by_id(id, picture)
@@ -65,3 +67,10 @@ def put_user_profile_picture_by_id_handler(id):
             "data": {"picture_url": picture_url},
         }
     )
+
+
+@user_route.route("/users/<string:id>/profile-picture", methods=["DELETE"])
+@jwt_required()
+def delete_user_profile_picture_by_id_handler(id):
+    remove_profile_picture_by_id(id)
+    return make_response({"status": "success", "message": "Profile picture removed"})

@@ -108,3 +108,18 @@ def upload_profile_picture_by_id(id, picture):
     user.save()
 
     return public_url
+
+
+def remove_profile_picture_by_id(id):
+    user = User.query.filter_by(id=id).first()
+    if not user:
+        raise NotFound("User not found")
+
+    storage_path = os.getenv("USER_PROFILE_PICTURE_PATH")
+
+    if not user.picture:
+        raise NotFound("This user has no profile picture to be deleted")
+
+    previous_picture_name = user.picture.split("/")[-1]
+    storage_reference = bucket.blob(storage_path + previous_picture_name)
+    storage_reference.delete()

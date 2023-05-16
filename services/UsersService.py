@@ -7,7 +7,7 @@ from flask_jwt_extended import create_access_token
 import datetime
 from datetime import timedelta
 from utils.storage import bucket
-import os
+from utils.config import Config
 
 
 def add_user(data: dict):
@@ -57,7 +57,7 @@ def login(data: dict):
             identity=user.id, expires_delta=timedelta(minutes=30)
         )
 
-    raise Unauthorized("Gagal login. Username atau password salah")
+    raise Unauthorized("Wrong password or username")
 
 
 def get_profile_by_id(id: str):
@@ -92,8 +92,7 @@ def upload_profile_picture_by_id(id, picture):
     if picture_ext not in ["jpg", "jpeg", "png"]:
         raise BadRequest("Image format must be jpg or jpeg or png")
 
-    storage_path = os.getenv("USER_PROFILE_PICTURE_PATH")
-
+    storage_path = Config.USER_PROFILE_PICTURE_PATH
     if user.picture:
         previous_picture_name = user.picture.split("/")[-1]
         storage_reference = bucket.blob(storage_path + previous_picture_name)
@@ -115,8 +114,7 @@ def remove_profile_picture_by_id(id):
     if not user:
         raise NotFound("User not found")
 
-    storage_path = os.getenv("USER_PROFILE_PICTURE_PATH")
-
+    storage_path = Config.USER_PROFILE_PICTURE_PATH
     if not user.picture:
         raise NotFound("This user has no profile picture to be deleted")
 

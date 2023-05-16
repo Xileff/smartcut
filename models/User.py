@@ -3,6 +3,8 @@ from utils.database import db
 
 class User(db.Model):
     __tablename__ = "users"
+
+    # columns
     id = db.Column(db.String(21), primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -14,8 +16,13 @@ class User(db.Model):
     is_email_verified = db.Column(db.Boolean(), nullable=False, server_default="0")
     is_barber = db.Column(db.Boolean(), nullable=False, server_default="0")
 
+    # relationship
+    email_verification_code = db.relationship(
+        "EmailVerificationCode", uselist=False, back_populates="users"
+    )
+
     def __repr__(self):
-        return "<Book %r>" & self.name
+        return "<User %r>" & self.name
 
     def save(self):
         db.session.add(self)

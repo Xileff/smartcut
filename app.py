@@ -7,6 +7,7 @@ from utils.config import Config
 from utils.database import db
 from utils.tokenize import jwt
 from api.users import user_route
+from api.email_verifications import verification_route
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -17,6 +18,7 @@ migrate = Migrate(app, db)
 CORS(app)
 
 app.register_blueprint(user_route)
+app.register_blueprint(verification_route)
 
 
 @app.errorhandler(HTTPException)

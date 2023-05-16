@@ -2,6 +2,7 @@ from flask import Blueprint, request, make_response
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.exceptions import Forbidden
 from services.UsersService import *
+from utils.tokenize import verify_user_identity
 
 user_route = Blueprint("user_route", __name__)
 
@@ -38,10 +39,7 @@ def post_user_login_handler():
 @user_route.route("/users/<string:id>/edit", methods=["PUT"])
 @jwt_required()
 def put_user_by_id_handler(id):
-    jwt_user_id = get_jwt_identity()
-    if jwt_user_id != id:
-        raise Forbidden("Forbidden access")
-
+    verify_user_identity(id)
     data = request.get_json()
     edit_profile_by_id(id, data)
 
@@ -58,6 +56,7 @@ def get_user_by_id_handler(id):
 @user_route.route("/users/<string:id>/profile-picture", methods=["PUT"])
 @jwt_required()
 def put_user_profile_picture_by_id_handler(id):
+    verify_user_identity(id)
     picture = request.files["picture"]
     picture_url = upload_profile_picture_by_id(id, picture)
     return make_response(
@@ -72,5 +71,6 @@ def put_user_profile_picture_by_id_handler(id):
 @user_route.route("/users/<string:id>/profile-picture", methods=["DELETE"])
 @jwt_required()
 def delete_user_profile_picture_by_id_handler(id):
+    verify_user_identity(id)
     remove_profile_picture_by_id(id)
     return make_response({"status": "success", "message": "Profile picture removed"})

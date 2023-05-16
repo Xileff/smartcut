@@ -18,7 +18,7 @@ class User(db.Model):
 
     # relationship
     email_verification_code = db.relationship(
-        "EmailVerificationCode", uselist=False, back_populates="users"
+        "EmailVerificationCode", uselist=False, back_populates="user"
     )
 
     def __repr__(self):

@@ -121,3 +121,6 @@ def remove_profile_picture_by_id(id):
     previous_picture_name = user.picture.split("/")[-1]
     storage_reference = bucket.blob(storage_path + previous_picture_name)
     storage_reference.delete()
+
+    user.picture = None
+    user.save()

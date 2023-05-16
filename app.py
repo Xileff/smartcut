@@ -8,6 +8,7 @@ from utils.database import db
 from utils.tokenize import jwt
 from api.users import user_route
 from api.email_verifications import verification_route
+from api.hairstyles import hairstyles_route
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -19,6 +20,7 @@ CORS(app)
 
 app.register_blueprint(user_route)
 app.register_blueprint(verification_route)
+app.register_blueprint(hairstyles_route)
 
 
 @app.errorhandler(HTTPException)

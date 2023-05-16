@@ -60,8 +60,10 @@ def login(data: dict):
     raise Unauthorized("Wrong password or username")
 
 
-def get_profile_by_id(id: str):
-    user = User.query.filter_by(id=id).first()
+def get_profile_by_username(username: str):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        raise NotFound("User not found")
     return user.serialize()
 
 

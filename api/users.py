@@ -36,7 +36,7 @@ def post_user_login_handler():
     )
 
 
-@user_route.route("/users/<string:id>/edit", methods=["PUT"])
+@user_route.route("/users/<string:id>", methods=["PUT"])
 @jwt_required()
 def put_user_by_id_handler(id):
     verify_user_identity(id)
@@ -46,10 +46,10 @@ def put_user_by_id_handler(id):
     return make_response({"status": "success", "message": "Berhasil mengedit data"})
 
 
-@user_route.route("/users/<string:id>", methods=["GET"])
+@user_route.route("/users/<string:username>", methods=["GET"])
 @jwt_required()
-def get_user_by_id_handler(id):
-    user = get_profile_by_id(id)
+def get_user_by_id_handler(username):
+    user = get_profile_by_username(username)
     return make_response({"status": "success", "data": {"user": user}})
 
 

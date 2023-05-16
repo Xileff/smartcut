@@ -6,6 +6,9 @@ class Hairstyle(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     name = db.Column(db.String(255), nullable=False, unique=True)
     picture = db.Column(db.String(255), nullable=True, default=None)
+    description = db.Column(
+        db.Text, nullable=False, default="Lorem ipsum dolor sit amet"
+    )
     category_id = db.Column(
         db.Integer,
         db.ForeignKey("hairstyle_category.id", ondelete="CASCADE"),

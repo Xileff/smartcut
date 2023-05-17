@@ -79,8 +79,10 @@ def edit_profile_by_id(id: str, data: dict):
         raise NotFound("User not found")
 
     user.name = name
-    user.email = email
     user.phone = phone
+    if user.email != email:
+        user.email = email
+        user.is_email_verified = False
 
     user.save()
 

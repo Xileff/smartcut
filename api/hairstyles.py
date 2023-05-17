@@ -20,3 +20,28 @@ def get_hairstyles_handler():
             },
         }
     )
+    
+@hairstyles_route.route("/hairstyles/<string:id>", methods=["GET"])
+@jwt_required()
+def get_single_hairstyle_handler(id):
+    name = request.args.get("name")
+    description = request.args.get("description")
+    category = request.args.get("category")
+    hairstyle = get_hairstyle_by_id(id)
+
+    if hairstyle is None:
+        return make_response(
+            {"status": "fail", "message": "Hairstyle not found"}, 404
+        )
+
+    response = {
+        "status": "success",
+        "data": {
+            "id": hairstyle["id"],
+            "name": hairstyle["name"],
+            "description": hairstyle["description"],
+            "category": hairstyle["category"],
+        },
+    }
+
+    return make_response(response, 200)

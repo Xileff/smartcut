@@ -5,8 +5,8 @@ from models.Hairstyle import Hairstyle
 
 
 def seed_hairstyle_category():
-    db.session.add(HairstyleCategory(name="asian"))
-    db.session.add(HairstyleCategory(name="western"))
+    db.session.add(HairstyleCategory(id=1, name="asian"))
+    db.session.add(HairstyleCategory(id=2, name="western"))
 
     db.session.commit()
 
@@ -14,28 +14,49 @@ def seed_hairstyle_category():
 def seed_hairstyle():
     hairstyles = {
         "Asian": {
-            "Comma Hair": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/comma-hair.jpg",
-            "Two Block": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/two-block.jpg",
-            "Messy Medium": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/messy-medium.jpg",
-            "Long Layered": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/long-layered.jpg",
-            "Textured Spiky": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/textured-spiky.jpg",
-            "Curtain": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/curtain.jpg",
-            "Brown Undercut": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/brown-undercut.jpg",
-            "Almond Middle Part": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/almond-middle-part.jpg",
-            "Voluminous Top with Undercut": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/voluminous-top-with-undercut.jpg",
-            "Short High Taper Fade": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/short-high-taper-fade.jpg",
-            "Asian Pompadour": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/asian-pompadour.jpg",
-            "Comb Over Bangs": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/comb-over-bangs.jpg",
-            "Asian Slick Back": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/asian-slick-back.jpg",
-            "Side Part": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/side-part.jpg",
-            "Fringe Up Medium": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/fringe-up.jpg",
-            "Super Classic": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/super-classic.jpg",
-            "Mullet": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/mullet.jpg",
-            "French Crop": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/french-crop.jpg",
-            "Men's Bob": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/mens-bob.jpg",
-            "Bowl Cut": "https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/bowl-cut.jpg",
+            "Comma Hair": "comma-hair.jpg",
+            "Two Block": "two-block.jpg",
+            "Messy Medium": "messy-medium.jpg",
+            "Long Layered": "long-layered.jpg",
+            "Textured Spiky": "textured-spiky.jpg",
+            "Curtain": "curtain.jpg",
+            "Brown Undercut": "brown-undercut.jpg",
+            "Almond Middle Part": "almond-middle-part.jpg",
+            "Voluminous Top with Undercut": "voluminous-top-with-undercut.jpg",
+            "Short High Taper Fade": "short-high-taper-fade.jpg",
+            "Asian Pompadour": "asian-pompadour.jpg",
+            "Comb Over Bangs": "comb-over-bangs.jpg",
+            "Asian Slick Back": "asian-slick-back.jpg",
+            "Side Part": "side-part.jpg",
+            "Fringe Up Medium": "fringe-up.jpg",
+            "Super Classic": "super-classic.jpg",
+            "Mullet": "mullet.jpg",
+            "French Crop": "french-crop.jpg",
+            "Men's Bob": "mens-bob.jpg",
+            "Bowl Cut": "bowl-cut.jpg",
         },
-        "Western": {},
+        "Western": {
+            "Afro": "afro.jpg",
+            "Brush Over": "brush-over.jpg",
+            "Brush Up": "brush-up.jpg",
+            "Classic Crew Up": "classic-crew-up.jpg",
+            "Comb Over": "comb-over",
+            "Conventional Hipster": "conventional-hipster.jpg",
+            "Dumpy Spikes": "dumpy-spikes.jpg",
+            "Faux Hawk": "faux-hawk.jpg",
+            "High and Tide": "high-and-tide.jpg",
+            "Ivy League": "ivy-league.jpg",
+            "Long Hairstyles": "long-hairstyles.jpg",
+            "Low Half Updo": "low-half-updo.jpg",
+            "Middle Part With Low Fade Men": "middle-part-with-low-fade-men.jpg",
+            "Mullet Hairstyle": "mullet-hairstyle.jpg",
+            "Pompadour": "pompadour.jpg",
+            "Razored Shag": "razored-shag.jpg",
+            "Short Conservative": "short-conservative.jpg",
+            "Short Messy": "short-messy.jpg",
+            "Straight Texture": "short-texture.jpg",
+            "Textured Fringe": "textured-fringe.jpg"
+        },
     }
 
     for category in hairstyles:
@@ -43,7 +64,7 @@ def seed_hairstyle():
             db.session.add(
                 Hairstyle(
                     name=hairstyle,
-                    picture=hairstyles[category][hairstyle],
+                    picture="https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/" + hairstyles[category][hairstyle],
                     category_id=1 if category == "Asian" else 2,
                 )
             )
@@ -63,7 +84,7 @@ def unseed_hairstyle_category():
 
 if __name__ == "__main__":
     with app.app_context():
-        unseed_hairstyle()
-        unseed_hairstyle_category()
+        # unseed_hairstyle()
+        # unseed_hairstyle_category()
         seed_hairstyle_category()
         seed_hairstyle()

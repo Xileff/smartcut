@@ -24,3 +24,12 @@ class Hairstyle(db.Model):
             "picture": self.picture,
             "category": self.category.name,
         }
+
+    def serialize_complete(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "picture": self.picture,
+            "description": self.description,
+            "category": self.category.name,
+        }

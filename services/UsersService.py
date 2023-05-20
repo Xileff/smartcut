@@ -15,7 +15,7 @@ def add_user(data: dict):
 
     if not all(key in data for key in required_keys):
         raise BadRequest(
-            "Gagal menambahkan user. Mohon lengkapi nama, username, password, email dan nomor telepon"
+            "Registration failed. All fields(name, username, password, email, phone) are required."
         )
 
     name, username, password, email, phone = data.values()
@@ -26,7 +26,7 @@ def add_user(data: dict):
 
     if existing_user:
         raise Conflict(
-            "Gagal menambahkan user. Username, email, atau nomor telepon sudah dipakai."
+            "Registration failed. Either username, email, or phone number has already been used to register."
         )
 
     id = "user-" + generate(size=16)
@@ -38,7 +38,7 @@ def add_user(data: dict):
         username=username,
         password=generate_password_hash(password),
         email=email,
-        phone=phone,
+        phone="62" + phone[1:] if phone.startswith("0") else phone,
         date_joined=dateJoined,
         is_email_verified=False,
         is_barber=False,

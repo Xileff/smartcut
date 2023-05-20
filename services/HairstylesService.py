@@ -20,13 +20,10 @@ def get_hairstyles(name, category):
 
     return [hairstyle.serialize() for hairstyle in hairstyles]
 
+
 def get_hairstyle_by_id(id):
-    hairstyle = Hairstyle.query.filter_by(
-        id = id
-    ).first()
+    hairstyle = Hairstyle.query.filter_by(id=id).first()
     if not hairstyle:
         raise NotFound("Hairstyle not found")
 
-
     return hairstyle.serialize_complete()
-

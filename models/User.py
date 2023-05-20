@@ -10,7 +10,7 @@ class User(db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(102), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    phone = db.Column(db.String(13), unique=True, nullable=False)
+    phone = db.Column(db.BigInteger(), unique=True, nullable=False)
     picture = db.Column(db.String(255), nullable=True, default=None)
     date_joined = db.Column(db.DateTime, nullable=False)
     is_email_verified = db.Column(db.Boolean(), nullable=False, server_default="0")
@@ -34,7 +34,7 @@ class User(db.Model):
             "name": self.name,
             "username": self.username,
             "email": self.email,
-            "phone": self.phone,
+            "phone": str(self.phone),
             "picture": self.picture,
             "dateJoined": self.date_joined,
         }

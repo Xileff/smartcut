@@ -6,9 +6,15 @@ import logging
 from utils.config import Config
 from utils.database import db
 from utils.tokenize import jwt
+
 from api.users import user_route
 from api.email_verifications import verification_route
-from api.hairstyles import hairstyles_route
+from api.id_cards import id_card_route
+from api.hairstyles import hairstyle_route
+from api.barbershops import barbershop_route
+from api.reviews import review_route
+from api.appointments import appointment_route
+from api.predictions import predictions_route
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -20,7 +26,12 @@ CORS(app)
 
 app.register_blueprint(user_route)
 app.register_blueprint(verification_route)
-app.register_blueprint(hairstyles_route)
+app.register_blueprint(id_card_route)
+app.register_blueprint(hairstyle_route)
+app.register_blueprint(barbershop_route)
+app.register_blueprint(review_route)
+app.register_blueprint(appointment_route)
+app.register_blueprint(predictions_route)
 
 
 @app.errorhandler(HTTPException)

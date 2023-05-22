@@ -18,8 +18,12 @@ class User(db.Model):
 
     # relationship
     email_verification_code = db.relationship(
-        "EmailVerificationCode", uselist=False, back_populates="user"
+        "EmailVerificationCode", back_populates="user", uselist=False
     )
+    id_card = db.relationship("IdCard", back_populates="user", uselist=False)
+    barbershop = db.relationship("Barbershop", back_populates="user", uselist=False)
+    appointments = db.relationship("Appointment", back_populates="user")
+    predictions = db.relationship("Prediction", back_populates="user")
 
     def __repr__(self):
         return "<User %r>" & self.name

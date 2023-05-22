@@ -2,10 +2,10 @@ from flask import Blueprint, request, make_response
 from flask_jwt_extended import jwt_required
 from services.HairstylesService import *
 
-hairstyles_route = Blueprint("hairstyles_route", __name__)
+hairstyle_route = Blueprint("hairstyle_route", __name__)
 
 
-@hairstyles_route.route("/hairstyles", methods=["GET"])
+@hairstyle_route.route("/hairstyles", methods=["GET"])
 @jwt_required()
 def get_hairstyles_handler():
     name = request.args.get("name")
@@ -21,7 +21,7 @@ def get_hairstyles_handler():
     )
 
 
-@hairstyles_route.route("/hairstyles/<string:id>", methods=["GET"])
+@hairstyle_route.route("/hairstyles/<string:id>", methods=["GET"])
 @jwt_required()
 def get_single_hairstyle_handler(id):
     hairstyle = get_hairstyle_by_id(id)

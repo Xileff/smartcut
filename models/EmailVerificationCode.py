@@ -3,7 +3,7 @@ from utils.database import db
 
 
 class EmailVerificationCode(db.Model):
-    __tablename__ = "email_verification_code"
+    __tablename__ = "email_verification_codes"
 
     # columns
     code = db.Column(db.String(8), nullable=False)

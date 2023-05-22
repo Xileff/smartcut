@@ -55,7 +55,7 @@ def seed_hairstyle():
             "Short Conservative": "short-conservative.jpg",
             "Short Messy": "short-messy.jpg",
             "Straight Texture": "short-texture.jpg",
-            "Textured Fringe": "textured-fringe.jpg"
+            "Textured Fringe": "textured-fringe.jpg",
         },
     }
 
@@ -64,7 +64,7 @@ def seed_hairstyle():
             db.session.add(
                 Hairstyle(
                     name=hairstyle,
-                    picture="https://storage.googleapis.com/smartcut-backend-bucket/hairstyle/" + hairstyles[category][hairstyle],
+                    picture=hairstyles[category][hairstyle],
                     category_id=1 if category == "Asian" else 2,
                 )
             )
@@ -73,18 +73,18 @@ def seed_hairstyle():
 
 
 def unseed_hairstyle():
-    db.session.execute(db.text("DELETE FROM hairstyle"))
+    db.session.execute(db.text("DELETE FROM hairstyles"))
     db.session.commit()
 
 
 def unseed_hairstyle_category():
-    db.session.execute(db.text("DELETE FROM hairstyle_category"))
+    db.session.execute(db.text("DELETE FROM hairstyle_categories"))
     db.session.commit()
 
 
 if __name__ == "__main__":
     with app.app_context():
-        # unseed_hairstyle()
-        # unseed_hairstyle_category()
+        unseed_hairstyle()
+        unseed_hairstyle_category()
         seed_hairstyle_category()
         seed_hairstyle()

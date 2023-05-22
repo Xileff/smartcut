@@ -2,7 +2,7 @@ from utils.database import db
 
 
 class HairstyleCategory(db.Model):
-    __tablename__ = "hairstyle_category"
+    __tablename__ = "hairstyle_categories"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     name = db.Column(db.String(255), nullable=False, unique=True)

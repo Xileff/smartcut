@@ -16,3 +16,8 @@ def upload_picture(picture, path, filename):
     storage_reference.upload_from_file(picture, content_type="image")
 
     return storage_reference.public_url
+
+
+def remove_file(path, filename):
+    storage_reference = bucket.blob(path + filename)
+    storage_reference.delete()

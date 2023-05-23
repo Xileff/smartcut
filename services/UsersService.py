@@ -6,8 +6,8 @@ from werkzeug.exceptions import BadRequest, Unauthorized, Conflict, NotFound
 from flask_jwt_extended import create_access_token
 import datetime
 from datetime import timedelta
-from utils.storage import bucket
 from utils.config import Config
+from utils.storage import upload_picture, remove_file
 
 
 def add_user(data: dict):
@@ -89,23 +89,17 @@ def edit_profile_by_id(id: str, data: dict):
 
 def upload_profile_picture_by_id(id, picture):
     user: User = User.query.filter_by(id=id).first()
+
     if not user:
         raise NotFound("User not found")
 
-    picture_ext = picture.filename.split(".")[-1]
-    if picture_ext not in ["jpg", "jpeg", "png"]:
-        raise BadRequest("Image format must be jpg or jpeg or png")
-
-    storage_path = Config.USER_PROFILE_PICTURE_PATH
     if user.picture:
         previous_picture_name = user.picture.split("/")[-1]
-        storage_reference = bucket.blob(storage_path + previous_picture_name)
-        storage_reference.delete()
+        remove_file(Config.USER_PROFILE_PICTURE_PATH, previous_picture_name)
 
-    picture.filename = user.id + "." + picture_ext
-    storage_reference = bucket.blob(storage_path + picture.filename)
-    storage_reference.upload_from_file(picture, content_type="image")
-    public_url = storage_reference.public_url
+    public_url = upload_picture(
+        picture=picture, path=Config.USER_PROFILE_PICTURE_PATH, filename=user.id
+    )
 
     user.picture = public_url
     user.save()
@@ -115,16 +109,15 @@ def upload_profile_picture_by_id(id, picture):
 
 def remove_profile_picture_by_id(id):
     user = User.query.filter_by(id=id).first()
+
     if not user:
         raise NotFound("User not found")
 
-    storage_path = Config.USER_PROFILE_PICTURE_PATH
     if not user.picture:
         raise NotFound("This user has no profile picture to be deleted")
 
-    previous_picture_name = user.picture.split("/")[-1]
-    storage_reference = bucket.blob(storage_path + previous_picture_name)
-    storage_reference.delete()
+    picture_name = user.picture.split("/")[-1]
+    remove_file(path=Config.USER_PROFILE_PICTURE_PATH, filename=picture_name)
 
     user.picture = None
     user.save()

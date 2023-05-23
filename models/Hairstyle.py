@@ -1,6 +1,5 @@
 from utils.database import db
-from dotenv import load_dotenv
-import os
+from utils.config import Config
 
 
 class Hairstyle(db.Model):
@@ -25,9 +24,9 @@ class Hairstyle(db.Model):
             "id": self.id,
             "name": self.name,
             "picture": "https://storage.googleapis.com/"
-            + os.getenv("STORAGE_BUCKET")
+            + Config.STORAGE_BUCKET
             + "/"
-            + os.getenv("HAIRSTYLE_PICTURE_PATH")
+            + Config.HAIRSTYLE_PICTURE_PATH
             + self.picture,
             "category": self.category.name,
         }

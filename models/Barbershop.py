@@ -1,4 +1,7 @@
 from utils.database import db
+from models.Appointment import Appointment
+from models.Review import Review
+from sqlalchemy import func
 
 
 class Barbershop(db.Model):
@@ -7,6 +10,7 @@ class Barbershop(db.Model):
     name = db.Column(db.String(255), nullable=False)
     address = db.Column(db.String(255), nullable=False)
     picture = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text(), nullable=False)
     latitude = db.Column(db.Numeric(10, 8), nullable=False)
     longitude = db.Column(db.Numeric(11, 8), nullable=False)
     user_id = db.Column(
@@ -26,9 +30,27 @@ class Barbershop(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "name": self.name,
             "address": self.address,
             "picture": self.picture,
+            "description": self.description,
             "latitude": self.latitude,
             "longitude": self.longitude,
-            "user_id": self.user_id,
+        }
+
+    def serialize_simple(self):
+        rating = (
+            db.session.query(func.avg(Review.stars))
+            .join(Appointment, Review.appointment)
+            .join(Barbershop, Appointment.barbershop)
+            .filter(Barbershop.id == self.id)
+            .scalar()
+        )
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "picture": self.picture,
+            "description": self.description,
+            "rating": rating or 0,
         }

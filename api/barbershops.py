@@ -1,3 +1,5 @@
+# barbershops.py
+
 from flask import Blueprint, request, make_response
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from services.BarbershopsService import *
@@ -13,14 +15,24 @@ def post_barbershop_handler():
         "name": request.form.get("name"),
         "address": request.form.get("address"),
         "picture": request.files.get("picture"),
+        "description": request.form.get("description"),
         "latitude": request.form.get("latitude"),
         "longitude": request.form.get("longitude"),
         "user_id": get_jwt_identity(),
     }
 
-    add_barbershop(data)
+    created_barbershop_id = add_barbershop(data)
 
-    return make_response({"status": "success", "message": "Barbershop created!"})
+    return make_response(
+        {
+            "status": "success",
+            "message": "Barbershop created!",
+            "data": {
+                "barbershopId": created_barbershop_id,
+            },
+        },
+        201,
+    )
 
 
 @barbershop_route.route("/barbershops/<string:uid>", methods=["PUT"])
@@ -31,6 +43,7 @@ def put_barbershop_handler(uid):
         "name": request.form.get("name"),
         "address": request.form.get("address"),
         "picture": request.files.get("picture"),
+        "description": request.form.get("description"),
         "latitude": request.form.get("latitude"),
         "longitude": request.form.get("longitude"),
     }
@@ -40,10 +53,23 @@ def put_barbershop_handler(uid):
 
 
 @barbershop_route.route("/barbershops", methods=["GET"])
+@jwt_required()
 def get_barbershops_handler():
-    return
+    barbershops = get_barbershops()
+    return make_response(
+        {
+            "status": "success",
+            "data": {
+                "barbershops": barbershops,
+            },
+        }
+    )
 
 
 @barbershop_route.route("/barbershops/<string:id>", methods=["GET"])
 def get_barbershop_by_id_handler(id):
-    return
+    barbershop = get_barbershop_by_id(id)
+    return {
+        "status": "success",
+        "data": barbershop,
+    }

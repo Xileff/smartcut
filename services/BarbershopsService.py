@@ -1,15 +1,29 @@
+# BarbershopsService.py
+
 from models.Barbershop import Barbershop
 from models.IdCard import IdCard
 from models.User import User
-from werkzeug.exceptions import BadRequest, NotFound, Forbidden, Unauthorized
+from werkzeug.exceptions import BadRequest, NotFound, Forbidden, Conflict
 from nanoid import generate
 from utils.storage import upload_picture, remove_file
 from utils.config import Config
 
 
 def add_barbershop(data):
-    required_keys = ["name", "address", "picture", "latitude", "longitude", "user_id"]
-    name, address, picture, latitude, longitude, user_id = data.values()
+    required_keys = [
+        "name",
+        "address",
+        "picture",
+        "description",
+        "latitude",
+        "longitude",
+        "user_id",
+    ]
+    name, address, picture, description, latitude, longitude, user_id = data.values()
+
+    barbershop_exists = Barbershop.query.filter_by(user_id=user_id).first()
+    if barbershop_exists:
+        raise Conflict("You already have a barbershop")
 
     user_id_card = IdCard.query.filter_by(user_id=user_id).first()
     if not user_id_card:
@@ -31,6 +45,7 @@ def add_barbershop(data):
         name=name,
         address=address,
         picture=picture_url,
+        description=description,
         latitude=latitude,
         longitude=longitude,
         user_id=user_id,
@@ -41,17 +56,19 @@ def add_barbershop(data):
     user.is_barber = True
     user.save()
 
+    return id
 
-# todo
+
 def edit_barbershop(user_id, data):
     barbershop = Barbershop.query.filter_by(user_id=user_id).first()
     if not barbershop:
         raise NotFound("Barbershop not found")
 
-    name, address, picture, latitude, longitude = data.values()
+    name, address, picture, description, latitude, longitude = data.values()
 
     barbershop.name = name
     barbershop.address = address
+    barbershop.description = description
     barbershop.latitude = latitude
     barbershop.longitude = longitude
 
@@ -64,3 +81,13 @@ def edit_barbershop(user_id, data):
         barbershop.picture = public_url
 
     barbershop.save()
+
+
+def get_barbershops():
+    barbershops = Barbershop.query.all()
+    return [barbershop.serialize() for barbershop in barbershops]
+
+
+def get_barbershop_by_id(id):
+    barbershop = Barbershop.query.filter_by(id=id).first()
+    return barbershop.serialize_simple()

@@ -37,7 +37,7 @@ def add_barbershop(data):
     if any([name == "", address == "", latitude == "", longitude == "", user_id == ""]):
         raise BadRequest("All fields must not be empty")
 
-    id = "barbershop" + generate(size=16)
+    id = "barbershop-" + generate(size=16)
     picture_url = upload_picture(picture, Config.BARBERSHOP_PICTURE_PATH, id)
 
     barbershop = Barbershop(

@@ -1,10 +1,12 @@
 from utils.database import db
+from models.Review import Review
 
 
 class Appointment(db.Model):
     __tablename__ = "appointments"
     id = db.Column(db.String(21), primary_key=True)
     schedule = db.Column(db.DateTime(), nullable=False)
+    message = db.Column(db.String(255))
     is_finished = db.Column(db.Boolean(), nullable=False)
     is_canceled = db.Column(db.Boolean(), nullable=False)
     will_be_canceled = db.Column(db.Boolean(), nullable=False)
@@ -30,10 +32,11 @@ class Appointment(db.Model):
         return {
             "id": self.id,
             "schedule": self.schedule,
+            "barbershop_name": self.barbershop.name,
+            "message": self.message,
             "is_finished": self.is_finished,
             "is_canceled": self.is_canceled,
             "will_be_canceled": self.will_be_canceled,
             "date_canceled": self.date_canceled,
-            "barbershop_id": self.barbershop_id,
-            "user_id": self.user_id,
+            "rating": self.review.stars if self.review else 0,
         }

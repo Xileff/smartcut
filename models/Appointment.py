@@ -38,5 +38,5 @@ class Appointment(db.Model):
             "is_canceled": self.is_canceled,
             "will_be_canceled": self.will_be_canceled,
             "date_canceled": self.date_canceled,
-            "rating": self.review.stars if self.review else 0,
+            "rating": self.review.stars if self.review else "No rating yet",
         }

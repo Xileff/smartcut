@@ -52,5 +52,5 @@ class Barbershop(db.Model):
             "name": self.name,
             "picture": self.picture,
             "description": self.description,
-            "rating": rating or "No rating yet",
+            "rating": float(rating) or "No rating yet",
         }

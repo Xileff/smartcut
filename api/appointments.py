@@ -43,9 +43,6 @@ def get_appointments_handler():
 @appointment_route.route("/appointments/<string:id>", methods=["GET"])
 @jwt_required()
 def get_appointment_by_id_handler(id):
-    user_id = request.form.get("userId")
-    verify_user_identity(user_id)
-
     appointment = get_appointment(id)
     return make_response(
         {

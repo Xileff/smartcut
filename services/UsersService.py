@@ -58,9 +58,7 @@ def login(data: dict):
     user = User.query.filter_by(username=username).first()
 
     if user and check_password_hash(user.password, password):
-        return create_access_token(
-            identity=user.id, expires_delta=timedelta(minutes=30)
-        )
+        return create_access_token(identity=user.id, expires_delta=timedelta(days=7))
 
     raise Unauthorized("Wrong password or username")
 

@@ -53,7 +53,8 @@ def add_user(data: dict):
 
 
 def login(data: dict):
-    username, password = data.values()
+    username = data["username"]
+    password = data["password"]
     user = User.query.filter_by(username=username).first()
 
     if user and check_password_hash(user.password, password):

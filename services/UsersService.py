@@ -18,7 +18,11 @@ def add_user(data: dict):
             "Registration failed. All fields(name, username, password, email, phone) are required."
         )
 
-    name, username, password, email, phone = data.values()
+    name = data["name"]
+    username = data["username"]
+    password = data["password"]
+    email = data["email"]
+    phone = data["phone"]
 
     existing_user = User.query.filter(
         or_(User.username == username, User.email == email, User.phone == phone)
@@ -68,7 +72,9 @@ def get_profile_by_username(username: str):
 
 
 def edit_profile_by_id(id: str, data: dict):
-    name, email, phone = data.values()
+    name = data["name"]
+    email = data["email"]
+    phone = data["phone"]
 
     if any([name == "", email == "", phone == ""]):
         raise BadRequest("Name, email, and phone are required")

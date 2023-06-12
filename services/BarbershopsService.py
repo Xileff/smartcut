@@ -19,7 +19,14 @@ def add_barbershop(data):
         "longitude",
         "user_id",
     ]
-    name, address, picture, description, latitude, longitude, user_id = data.values()
+
+    name = data["name"]
+    address = data["address"]
+    picture = data["picture"]
+    description = data["description"]
+    latitude = data["latitude"]
+    longitude = data["longitude"]
+    user_id = data["user_id"]
 
     barbershop_exists = Barbershop.query.filter_by(user_id=user_id).first()
     if barbershop_exists:
@@ -64,7 +71,12 @@ def edit_barbershop(user_id, data):
     if not barbershop:
         raise NotFound("Barbershop not found")
 
-    name, address, picture, description, latitude, longitude = data.values()
+    name = data["name"]
+    address = data["address"]
+    picture = data["picture"]
+    description = data["description"]
+    latitude = data["latitude"]
+    longitude = data["longitude"]
 
     barbershop.name = name
     barbershop.address = address

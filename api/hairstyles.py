@@ -30,6 +30,7 @@ def get_single_hairstyle_handler(id):
         "data": {
             "id": hairstyle["id"],
             "name": hairstyle["name"],
+            "picture": hairstyle["picture"],
             "description": hairstyle["description"],
             "category": hairstyle["category"],
         },

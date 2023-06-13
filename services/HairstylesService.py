@@ -26,4 +26,4 @@ def get_hairstyle_by_id(id):
     if not hairstyle:
         raise NotFound("Hairstyle not found")
 
-    return hairstyle.serialize_complete()
+    return hairstyle.serialize()

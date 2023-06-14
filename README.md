@@ -11,23 +11,23 @@
 
 ## About Smartcut
 
-This is our capstone project in Bangkit 2023. It is an application that can give suitable hairstyle recommendations based on the user's face shape. We leverage Machine Learning algorithms using VGG-16 model to analyze the user's face shape and give personalized recommendations.
+This is our capstone project in Bangkit 2023. The application can give suitable hairstyle recommendations based on the user's face shape. We leverage Machine Learning algorithms using the VGG-16 model to analyze the user's facial shape and give personalized recommendations.
 
 ## Main Features
 
-- Analyze the user's face shape
+- Analyze the user's facial shape
 - Give recommendations based on the analyzed face shape
 
 ---
 
 How to replicate
 
-Assuming you already have Google Cloud Platform Project with linked billing account.
+Assuming you already have Google Cloud Platform Project with a linked billing account.
 - Create a Cloud SQL instance in the VPC and import our .sql database file
-- Create a serverless VPC connector for the VPC
-- Create a Cloud Storage bucket for this API, and create a service account with the role "Storage Admin", then download the key json file
+- Create a serverless VPC connector
+- Create a Cloud Storage Bucket and a service account with the role "Storage Admin", then download the key json file
 - Clone this repository
-- Add .env and the service account key json file
+- Add .env and the service account key JSON file
 - The .env file MUST contain : 
     - ```JWT_SECRET_KEY : *your_jwt_secret_key*```
     - ```STORAGE_BUCKET : *cloud_storage_bucket_name*```
@@ -36,23 +36,23 @@ Assuming you already have Google Cloud Platform Project with linked billing acco
     - ```HAIRSTYLE_PICTURE_PATH : *cloud_storage_directory*```
     - ```ID_CARD_PICTURE_PATH : *cloud_storage_directory*```
     - ```BARBERSHOP_PICTURE_PATH : *cloud_storage_directory*```
-- Create a virtual environment ```python -m venv venv```
+- Create a virtual environment ```python -m venv venv``` and activate it ```source venv/bin/activate```
 - Install the required dependencies```pip install -r requirements.txt```
 - Containerize it using Docker and tag it ```gcr.io/**YOUR_PROJECT_ID**/smartcut:v1```
-- Push the container image to Google Container Registry (gcr)
+- Push the container image to Google Container Registry (GCR)
 - Create a Cloud Run service
     - For the container image url, choose ```gcr.io/**YOUR_PROJECT_ID**/smartcut:v1```
     - For the region, we choose asia-southeast2-a(Jakarta) to get the lowest latency
-    - The minimum number of instance is 0
-    - The maximum number of instance is 1
+    - The minimum number of instances is 0
+    - The maximum number of instances is 1
     - The memory is 512MiB
-    - The number of CPU is 1
+    - The number of CPUs is 1
     - Add environment variables : ```DB_HOST, DB_NAME, DB_USER, DB_PASSWORD```
-        - For the DB_HOST, it is internal IP of the Cloud SQL instance
+        - For the DB_HOST, the value must be the internal IP of the Cloud SQL instance
     - To connect this Cloud Run instance to Cloud SQL, choose the same VPC as Cloud SQL. Here we use the serverless VPC connector created earlier.
     - **Deploy the application**
 
-The API specification can be found here https://drive.google.com/file/d/1Aq_TTDIuAyRKoXk8uddbzlW5c--Df46d/view?usp=sharing
+The API specification (documentation) can be found here https://drive.google.com/file/d/1Aq_TTDIuAyRKoXk8uddbzlW5c--Df46d/view?usp=sharing
 
 [linkedin - Rizki]: https://www.linkedin.com/in/rizkiajimahardika/
 [linkedin - Feri]: https://www.linkedin.com/in/ferifirmansah/

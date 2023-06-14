@@ -52,6 +52,8 @@ Assuming you already have Google Cloud Platform Project with linked billing acco
     - To connect this Cloud Run instance to Cloud SQL, choose the same VPC as Cloud SQL. Here we use the serverless VPC connector created earlier.
     - **Deploy the application**
 
+The API specification can be found here https://drive.google.com/file/d/1Aq_TTDIuAyRKoXk8uddbzlW5c--Df46d/view?usp=sharing
+
 [linkedin - Rizki]: https://www.linkedin.com/in/rizkiajimahardika/
 [linkedin - Feri]: https://www.linkedin.com/in/ferifirmansah/
 [linkedin - Nicholas]: https://www.linkedin.com/in/nicholas-sky-salvatio-1957091b6/

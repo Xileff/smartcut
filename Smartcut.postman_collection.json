@@ -1,0 +1,6071 @@
+{
+	"info": {
+		"_postman_id": "c909642d-8581-46d9-80af-6e580f74afcf",
+		"name": "Smartcut",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20238634"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User A",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 201', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have userId and it must not be empty', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    pm.expect(data).to.have.ownProperty('userId')\r",
+									"    pm.expect(data.userId).to.not.equals('')\r",
+									"    pm.environment.set('idUserA', data.userId)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Joe\",\r\n    \"username\": \"whoisjoe123\",\r\n    \"password\": \"secretpassword\",\r\n    \"email\": \"joe@gmail.com\",\r\n    \"phone\": \"6288992807058\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User B",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 201', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have userId and it must not be empty', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    pm.expect(data).to.have.ownProperty('userId')\r",
+									"    pm.expect(data.userId).to.not.equals('')\r",
+									"    pm.environment.set('idUserB', data.userId)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Stephen\",\r\n    \"username\": \"stephen\",\r\n    \"password\": \"secretpassword\",\r\n    \"email\": \"stephen@gmail.com\",\r\n    \"phone\": \"081299901234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have access token', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('token')\r",
+									"    pm.expect(data.token).to.not.equals('')\r",
+									"    pm.environment.set('tokenUserA', data.token)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"whoisjoe123\",\r\n    \"password\":\"secretpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have access token', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('token')\r",
+									"    pm.expect(data.token).to.not.equals('')\r",
+									"    pm.environment.set('tokenUserB', data.token)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"stephen\",\r\n    \"password\": \"secretpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User A Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('User object should contain correct properties', () => {\r",
+									"    body = pm.response.json()\r",
+									"    const { data: { user } } = body\r",
+									"    pm.expect(user).to.haveOwnProperty('id');\r",
+									"    pm.expect(user).to.haveOwnProperty('name');\r",
+									"    pm.expect(user).to.haveOwnProperty('username');\r",
+									"    pm.expect(user).to.haveOwnProperty('email');\r",
+									"    pm.expect(user).to.haveOwnProperty('phone');\r",
+									"    pm.expect(user).to.haveOwnProperty('picture');\r",
+									"    pm.expect(user).to.haveOwnProperty('dateJoined');\r",
+									"    }); "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/{{usernameA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"{{usernameA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User B Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('User object should contain correct properties', () => {\r",
+									"    body = pm.response.json()\r",
+									"    const { data: { user } } = body\r",
+									"    pm.expect(user).to.haveOwnProperty('id');\r",
+									"    pm.expect(user).to.haveOwnProperty('name');\r",
+									"    pm.expect(user).to.haveOwnProperty('username');\r",
+									"    pm.expect(user).to.haveOwnProperty('email');\r",
+									"    pm.expect(user).to.haveOwnProperty('phone');\r",
+									"    pm.expect(user).to.haveOwnProperty('picture');\r",
+									"    pm.expect(user).to.haveOwnProperty('dateJoined');\r",
+									"    }); "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/{{usernameB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"{{usernameB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile User A using valid token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})\r",
+									"\r",
+									"pm.test('when get user details', () => {\r",
+									"    pm.sendRequest({\r",
+									"        url:`${pm.environment.get('host')}/users/${pm.environment.get('usernameA')}`,\r",
+									"        method: 'GET',\r",
+									"        header: {\r",
+									"            Authorization: `Bearer ${pm.environment.get('tokenUserA')}`,\r",
+									"            },\r",
+									"        }, (error, response) => {\r",
+									"            const responseJson = response.json();\r",
+									"            console.log(responseJson)\r",
+									"            const { data: { user } } = responseJson;\r",
+									"            \r",
+									"            pm.test('User object should contain updated values', () => {\r",
+									"                    pm.expect(user).to.haveOwnProperty('id');\r",
+									"                    pm.expect(user).to.haveOwnProperty('name');\r",
+									"                    pm.expect(user).to.haveOwnProperty('username');\r",
+									"                    pm.expect(user).to.haveOwnProperty('email');\r",
+									"                    pm.expect(user).to.haveOwnProperty('phone');\r",
+									"                    pm.expect(user).to.haveOwnProperty('picture');\r",
+									"                    pm.expect(user).to.haveOwnProperty('dateJoined');\r",
+									"                    \r",
+									"                    pm.expect(user.name).to.equals(pm.environment.get('updateNameA'))\r",
+									"                    pm.expect(user.email).to.equals(pm.environment.get('updateEmailA'))\r",
+									"                    pm.expect(user.phone).to.equals(pm.environment.get('updatePhoneA'))\r",
+									"            }); \r",
+									"        });\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{updateNameA}}\",\r\n    \"email\":\"{{updateEmailA}}\",\r\n    \"phone\":\"{{updatePhoneA}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/{{idUserA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"{{idUserA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile User B using valid token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})\r",
+									"\r",
+									"pm.test('when get user details', () => {\r",
+									"    pm.sendRequest({\r",
+									"        url: `${pm.environment.get('host')}/users/${pm.environment.get('usernameB')}`,\r",
+									"        method: 'GET',\r",
+									"        header: {\r",
+									"            Authorization: `Bearer ${pm.environment.get('tokenUserB')}`\r",
+									"        }\r",
+									"    }, (error, response) => {\r",
+									"       const responseJson = response.json();\r",
+									"       const { data: { user } } = responseJson;\r",
+									"\r",
+									"       pm.test('User object should contain updated values', () => {\r",
+									"            pm.expect(user).to.haveOwnProperty('id');\r",
+									"            pm.expect(user).to.haveOwnProperty('name');\r",
+									"            pm.expect(user).to.haveOwnProperty('username');\r",
+									"            pm.expect(user).to.haveOwnProperty('email');\r",
+									"            pm.expect(user).to.haveOwnProperty('phone');\r",
+									"            pm.expect(user).to.haveOwnProperty('picture');\r",
+									"            pm.expect(user).to.haveOwnProperty('dateJoined');\r",
+									"            \r",
+									"            pm.expect(user.name).to.equals(pm.environment.get('updateNameB'))\r",
+									"            pm.expect(user.email).to.equals(pm.environment.get('updateEmailB'))\r",
+									"            pm.expect(user.phone).to.equals(pm.environment.get('updatePhoneB'))\r",
+									"       }); \r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{updateNameB}}\",\r\n    \"email\":\"{{updateEmailB}}\",\r\n    \"phone\":\"{{updatePhoneB}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/{{idUserB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"{{idUserB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile User A using User B's token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 403', () => {\r",
+									"    pm.expect(pm.response).to.have.status(403)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('fail')\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/{{idUserA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"{{idUserA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile User B using User A's token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 403', () => {\r",
+									"    pm.expect(pm.response).to.have.status(403)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('fail')\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/{{idUserB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"{{idUserB}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User edit profile picture(with files)",
+			"item": [
+				{
+					"name": "Edit profile picture User A",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/felix/Downloads/Smartcut.drawio.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/users/{{idUserA}}/profile-picture",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"{{idUserA}}",
+								"profile-picture"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete profile picture User A",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/{{idUserA}}/profile-picture",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"{{idUserA}}",
+								"profile-picture"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Hairstyles",
+			"item": [
+				{
+					"name": "Get All Hairstyles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code should be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have correct values', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    pm.expect(data).to.have.ownProperty('hairstyles')\r",
+									"    pm.expect(data.hairstyles).to.be.an('array')\r",
+									"    pm.expect(data.hairstyles.length).to.not.equals(0)\r",
+									"    \r",
+									"    const firstHairstyle = data.hairstyles[0]\r",
+									"    pm.expect(firstHairstyle).to.be.an('object')\r",
+									"    pm.expect(firstHairstyle).to.have.ownProperty('category')\r",
+									"    pm.expect(firstHairstyle.category).to.not.equals('')\r",
+									"    pm.expect(firstHairstyle).to.have.ownProperty('id')\r",
+									"    pm.expect(firstHairstyle.id).to.be.a('number')\r",
+									"    pm.expect(firstHairstyle).to.have.ownProperty('name')\r",
+									"    pm.expect(firstHairstyle.name).to.not.equals('')\r",
+									"    pm.expect(firstHairstyle).to.have.ownProperty('picture')\r",
+									"    pm.expect(firstHairstyle.picture).to.not.equals('')\r",
+									"\r",
+									"    pm.environment.set('idFirstHairstyle', firstHairstyle.id)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/hairstyles",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"hairstyles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Hairstyle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/hairstyles/{{idFirstHairstyle}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"hairstyles",
+								"{{idFirstHairstyle}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hairstyles with name param",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/hairstyles?name=a hair",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"hairstyles"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a hair"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hairstyles with category param",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/hairstyles?category=western",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"hairstyles"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "western"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hairstyle with name and category param",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/hairstyles?name=a hair&category=asian",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"hairstyles"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a hair"
+								},
+								{
+									"key": "category",
+									"value": "asian"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User uploads id card(with files)",
+			"item": [
+				{
+					"name": "User A adds his id card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nationalId",
+									"value": "4321432143214321",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/felix/Downloads/diamond10.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/identities",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"identities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B adds his id card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nationalId",
+									"value": "1234123412341234",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/felix/Downloads/Smartcut.drawio.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/identities",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"identities"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Barbershops(with files)",
+			"item": [
+				{
+					"name": "User A creates Barbershop A",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 201', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have the created barbershop id', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    pm.expect(data).to.have.ownProperty('barbershopId')\r",
+									"    pm.expect(data.barbershopId).to.not.equals('')\r",
+									"    pm.environment.set('idBarbershopA', data.barbershopId)\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Barbershop A",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Jl. Jembatan Besi III 44-10, Jemb. Besi, Kec. Tambora, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11320",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/felix/Downloads/Smartcut.drawio.png"
+								},
+								{
+									"key": "description",
+									"value": "lorem ipsum dolor sit amet",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "-6.150341884931396",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "106.796538",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/barbershops",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"barbershops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B creates Barbershop B",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 201', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have the created barbershop id', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    pm.expect(data).to.have.ownProperty('barbershopId')\r",
+									"    pm.expect(data.barbershopId).to.not.equals('')\r",
+									"    pm.environment.set('idBarbershopB', data.barbershopId)\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Barbershop B",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Jl. Jembatan Besi III 44-10, Jemb. Besi, Kec. Tambora, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11320",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/felix/Downloads/Smartcut.drawio.png"
+								},
+								{
+									"key": "description",
+									"value": "lorem ipsum dolor sit amet",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "-6.150341884931396",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "106.796538",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/barbershops",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"barbershops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User get all barbershops",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"    pm.expect(body.data).to.have.ownProperty('barbershops')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/barbershops",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"barbershops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A get Barbershop B data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have the correct structure', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('id')\r",
+									"    pm.expect(data.id).to.equals(pm.environment.get('idBarbershopB'))\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('name')\r",
+									"    pm.expect(data.name).to.not.equals('')\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('picture')\r",
+									"    pm.expect(data.picture).to.not.equals('')\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('description')\r",
+									"    pm.expect(data.description).to.not.equals('')\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('rating')\r",
+									"    pm.expect(data).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/barbershops/{{idBarbershopB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"barbershops",
+								"{{idBarbershopB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B get Barbershop A data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have the correct structure', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('id')\r",
+									"    pm.expect(data.id).to.equals(pm.environment.get('idBarbershopA'))\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('name')\r",
+									"    pm.expect(data.name).to.not.equals('')\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('picture')\r",
+									"    pm.expect(data.picture).to.not.equals('')\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('description')\r",
+									"    pm.expect(data.description).to.not.equals('')\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('rating')\r",
+									"    pm.expect(data).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/barbershops/{{idBarbershopA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"barbershops",
+								"{{idBarbershopA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A edits Barbershop A",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{updateNameBarbershopA}}",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "{{updateAddressBarbershopA}}",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/D:/Images/Downloads/Google-cloud-logo.jpg"
+								},
+								{
+									"key": "description",
+									"value": "{{updateDescriptionBarbershopA}}",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "{{updateLatitudeBarbershopA}}",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "{{updateLongitudeBarbershopA}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/barbershops/{{idUserA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"barbershops",
+								"{{idUserA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B edits Barbershop B",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{updateNameBarbershopB}}",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "{{updateAddressBarbershopB}}",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/D:/Images/Downloads/Google-cloud-logo.jpg"
+								},
+								{
+									"key": "description",
+									"value": "{{updateDescriptionBarbershopB}}",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "{{updateLatitudeBarbershopB}}",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "{{updateLongitudeBarbershopB}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/barbershops/{{idUserB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"barbershops",
+								"{{idUserB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A edits barbershop B",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 403', () => {\r",
+									"    pm.expect(pm.response).to.have.status(403)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('fail')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{updateNameBarbershopA}}",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "{{updateAddressBarbershopA}}",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/D:/Images/Downloads/0062925db243a34a88ee2234fea744d6.jpg"
+								},
+								{
+									"key": "description",
+									"value": "{{updateDescriptionBarbershopA}}",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "{{updateLatitudeBarbershopA}}",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "{{updateLongitudeBarbershopA}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/barbershops/{{idUserB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"barbershops",
+								"{{idUserB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B edits barbershop A",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 403', () => {\r",
+									"    pm.expect(pm.response).to.have.status(403)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('fail')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{updateNameBarbershopB}}",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "{{updateAddressBarbershopB}}",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/D:/Images/Downloads/linkedin.png"
+								},
+								{
+									"key": "description",
+									"value": "{{updateDescriptionBarbershopB}}",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "{{updateLatitudeBarbershopB}}",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "{{updateLongitudeBarbershopB}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/barbershops/{{idUserA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"barbershops",
+								"{{idUserA}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "User A books appointment A1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code must be 201 created', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have the appointment id just created', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    \r",
+									"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+									"    pm.expect(data.appointmentId).to.not.equals('')\r",
+									"\r",
+									"    pm.environment.set('idAppointmentA1', data.appointmentId)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-24\",\r\n    \"message\": \"Rapiin aja ya bang\",\r\n    \"barbershopId\": \"{{idBarbershopB}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A books appointment A2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code must be 201 created', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have the appointment id just created', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    \r",
+									"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+									"    pm.expect(data.appointmentId).to.not.equals('')\r",
+									"\r",
+									"    pm.environment.set('idAppointmentA2', data.appointmentId)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-25\",\r\n    \"message\": \"Yang kemaren kependekan bang\",\r\n    \"barbershopId\": \"{{idBarbershopB}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B books appointment B1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code must be 201 created', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have the appointment id just created', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    \r",
+									"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+									"    pm.expect(data.appointmentId).to.not.equals('')\r",
+									"\r",
+									"    pm.environment.set('idAppointmentB1', data.appointmentId)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-24\",\r\n    \"message\": \"Jamet bang\",\r\n    \"barbershopId\": \"{{idBarbershopA}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B books appointment B2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code must be 201 created', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have the appointment id just created', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    \r",
+									"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+									"    pm.expect(data.appointmentId).to.not.equals('')\r",
+									"\r",
+									"    pm.environment.set('idAppointmentB2', data.appointmentId)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-25\",\r\n    \"message\": \"Yang kemaren terlalu jamet bang\",\r\n    \"barbershopId\": \"{{idBarbershopA}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A books using invalid ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code must be 403 Forbidden', () => {\r",
+									"    pm.expect(pm.response).to.have.status(403)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('fail')\r",
+									"    \r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-24\",\r\n    \"message\": \"Rapiin aja ya bang\",\r\n    \"barbershopId\": \"{{idBarbershopB}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B books using invalid ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code must be 403 Forbidden', () => {\r",
+									"    pm.expect(pm.response).to.have.status(403)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('fail')\r",
+									"    \r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-25\",\r\n    \"message\": \"Jamet bang\",\r\n    \"barbershopId\": \"{{idBarbershopA}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A books his own barbershop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 400', () => {\r",
+									"    pm.expect(pm.response).to.have.status(400)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('fail')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-24\",\r\n    \"message\": \"Rapiin aja ya bang\",\r\n    \"barbershopId\": \"{{idBarbershopA}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B books his own barbershop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code must be 400', () => {\r",
+									"    pm.expect(pm.response).to.have.status(400)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('fail')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"    pm.expect(body.message).to.not.equals('')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-25\",\r\n    \"message\": \"Jamet bang\",\r\n    \"barbershopId\": \"{{idBarbershopB}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A gets all his appointments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/appointments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B gets all his appointments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/appointments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A get appointment A1",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/appointments/{{idAppointmentA1}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idAppointmentA1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B get appointment B1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/appointments/{{idAppointmentB1}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idAppointmentB1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A finish appointment A1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idAppointmentA1}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idAppointmentA1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A cancel appointment A2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"cancel\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idAppointmentA2}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idAppointmentA2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B finish appointment B1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idAppointmentB1}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idAppointmentB1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B cancel appointment B2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"cancel\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idAppointmentB2}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idAppointmentB2}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "User A books appointment A3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code must be 201 created', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have the appointment id just created', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    \r",
+									"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+									"    pm.expect(data.appointmentId).to.not.equals('')\r",
+									"\r",
+									"    pm.environment.set('idAppointmentA3', data.appointmentId)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-26\",\r\n    \"message\": \"Cepmek bang\",\r\n    \"barbershopId\": \"{{idBarbershopB}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserA}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserA}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A finish appointment A3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idAppointmentA3}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idAppointmentA3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A review appointment A1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stars\": 4,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentA1}}\",\r\n    \"userId\": \"{{idUserA}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/reviews",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User A review appointment A3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserA}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stars\": 5,\r\n    \"message\": \"Ini lebih gg lagi\",\r\n    \"appointmentId\": \"{{idAppointmentA3}}\",\r\n    \"userId\": \"{{idUserA}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/reviews",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B books appointment B3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code must be 201 created', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body must be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have the appointment id just created', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    \r",
+									"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+									"    pm.expect(data.appointmentId).to.not.equals('')\r",
+									"\r",
+									"    pm.environment.set('idAppointmentB3', data.appointmentId)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule\": \"2023-05-25\",\r\n    \"message\": \"Yang kemaren terlalu jamet bang\",\r\n    \"barbershopId\": \"{{idBarbershopA}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idUserB}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idUserB}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B finish appointment B3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/{{idAppointmentB3}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"{{idAppointmentB3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B review appointment B1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stars\": 3,\r\n    \"message\": \"Yaa lumayan lah\",\r\n    \"appointmentId\": \"{{idAppointmentB1}}\",\r\n    \"userId\": \"{{idUserB}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/reviews",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User B review appointment B3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenUserB}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stars\": 5,\r\n    \"message\": \"Ini lebih gg lagi\",\r\n    \"appointmentId\": \"{{idAppointmentB3}}\",\r\n    \"userId\": \"{{idUserB}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/reviews",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dummy data",
+			"item": [
+				{
+					"name": "Create users",
+					"item": [
+						{
+							"name": "Create User Felix",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 201', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have userId and it must not be empty', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    pm.expect(data).to.have.ownProperty('userId')\r",
+											"    pm.expect(data.userId).to.not.equals('')\r",
+											"    pm.environment.set('idFelix', data.userId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Felix Savero\",\r\n    \"username\": \"felixsavero\",\r\n    \"password\": \"rahasiafelix123\",\r\n    \"email\": \"felix@gmail.com\",\r\n    \"phone\": \"6288909201010\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create User Farrell",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 201', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have userId and it must not be empty', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    pm.expect(data).to.have.ownProperty('userId')\r",
+											"    pm.expect(data.userId).to.not.equals('')\r",
+											"    pm.environment.set('idFarrell', data.userId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Farrell Liko Tanlimhuijaya\",\r\n    \"username\": \"farrell12345\",\r\n    \"password\": \"rahasiafarrell123\",\r\n    \"email\": \"farrell@gmail.com\",\r\n    \"phone\": \"6288909201234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create User Feri",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 201', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have userId and it must not be empty', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    pm.expect(data).to.have.ownProperty('userId')\r",
+											"    pm.expect(data.userId).to.not.equals('')\r",
+											"    pm.environment.set('idFeri', data.userId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Feri Firmansah\",\r\n    \"username\": \"ferifirmansah123\",\r\n    \"password\": \"rahasiaferi123\",\r\n    \"email\": \"feri@gmail.com\",\r\n    \"phone\": \"6288909204321\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create User Sky",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 201', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have userId and it must not be empty', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    pm.expect(data).to.have.ownProperty('userId')\r",
+											"    pm.expect(data.userId).to.not.equals('')\r",
+											"    pm.environment.set('idSky', data.userId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nicholas Sky Salvatio\",\r\n    \"username\": \"skysalvatio123\",\r\n    \"password\": \"rahasiasky123\",\r\n    \"email\": \"sky@gmail.com\",\r\n    \"phone\": \"6288909201423\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create User Rafli",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 201', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have userId and it must not be empty', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    pm.expect(data).to.have.ownProperty('userId')\r",
+											"    pm.expect(data.userId).to.not.equals('')\r",
+											"    pm.environment.set('idRafli', data.userId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Rafli Dwi Putra\",\r\n    \"username\": \"raflidwi123\",\r\n    \"password\": \"rahasiarafli123\",\r\n    \"email\": \"rafli@gmail.com\",\r\n    \"phone\": \"6288909203231\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create User Rizki",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 201', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have userId and it must not be empty', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    pm.expect(data).to.have.ownProperty('userId')\r",
+											"    pm.expect(data.userId).to.not.equals('')\r",
+											"    pm.environment.set('idRafli', data.userId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Rizki Aji Mahardika\",\r\n    \"username\": \"rizkiaji123\",\r\n    \"password\": \"rahasiarizki123\",\r\n    \"email\": \"rizkiaji@gmail.com\",\r\n    \"phone\": \"6288909204221\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users login",
+					"item": [
+						{
+							"name": "Felix Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 200', () => {\r",
+											"    pm.expect(pm.response).to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have access token', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"\r",
+											"    pm.expect(data).to.have.ownProperty('token')\r",
+											"    pm.expect(data.token).to.not.equals('')\r",
+											"    pm.environment.set('tokenFelix', data.token)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"felixsavero\",\r\n    \"password\":\"rahasiafelix123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Farrell Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 200', () => {\r",
+											"    pm.expect(pm.response).to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have access token', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"\r",
+											"    pm.expect(data).to.have.ownProperty('token')\r",
+											"    pm.expect(data.token).to.not.equals('')\r",
+											"    pm.environment.set('tokenFarrell', data.token)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"farrell12345\",\r\n    \"password\": \"rahasiafarrell123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 200', () => {\r",
+											"    pm.expect(pm.response).to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have access token', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"\r",
+											"    pm.expect(data).to.have.ownProperty('token')\r",
+											"    pm.expect(data.token).to.not.equals('')\r",
+											"    pm.environment.set('tokenFeri', data.token)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"ferifirmansah123\",\r\n    \"password\": \"rahasiaferi123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sky Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 200', () => {\r",
+											"    pm.expect(pm.response).to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have access token', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"\r",
+											"    pm.expect(data).to.have.ownProperty('token')\r",
+											"    pm.expect(data.token).to.not.equals('')\r",
+											"    pm.environment.set('tokenSky', data.token)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"skysalvatio123\",\r\n    \"password\": \"rahasiasky123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 200', () => {\r",
+											"    pm.expect(pm.response).to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have access token', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"\r",
+											"    pm.expect(data).to.have.ownProperty('token')\r",
+											"    pm.expect(data.token).to.not.equals('')\r",
+											"    pm.environment.set('tokenRafli', data.token)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"raflidwi123\",\r\n    \"password\": \"rahasiarafli123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rizki Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code should be 200', () => {\r",
+											"    pm.expect(pm.response).to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers should have Content-Type application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have access token', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"\r",
+											"    pm.expect(data).to.have.ownProperty('token')\r",
+											"    pm.expect(data.token).to.not.equals('')\r",
+											"    pm.environment.set('tokenRizki', data.token)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"rizkiaji123\",\r\n    \"password\": \"rahasiarizki123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Felix, Farrell, Sky create barbershop",
+					"item": [
+						{
+							"name": "User Felix adds his ID Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFelix}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nationalId",
+											"value": "3173317331733173",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/identities",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"identities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Farrell adds his ID Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFarrell}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nationalId",
+											"value": "3174317431743174",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/identities",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"identities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Sky adds his ID Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenSky}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nationalId",
+											"value": "3175317531753175",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/identities",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"identities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Felix creates barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response status code must be 201', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"    pm.expect(body.message).to.not.equals('')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have the created barbershop id', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    pm.expect(data).to.have.ownProperty('barbershopId')\r",
+											"    pm.expect(data.barbershopId).to.not.equals('')\r",
+											"    pm.environment.set('idBarbershopFelix', data.barbershopId)\r",
+											"\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFelix}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "The Men’s Barbershop",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Jl. KH.Moh.Mansyur, RT.3/RW.8, Tanah Sereal, Kec. Tambora, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11270",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": "/C:/Users/dwipu/Documents/Bangkit/CAPSTONE/Barbershop/Felix's.jpg"
+										},
+										{
+											"key": "description",
+											"value": "The Men’s Barbershop Jembatan 5 is a Barber shop located at Jl. KH.Moh.Mansyur, RT.3/RW.8, Tanah Sereal, Tambora, West Jakarta City, Jakarta  11270, ID. The business is listed under barber shop category. It has received 83 reviews with an average rating of 4.7 stars.",
+											"type": "text"
+										},
+										{
+											"key": "latitude",
+											"value": "-6.151645",
+											"type": "text"
+										},
+										{
+											"key": "longitude",
+											"value": "106.807627",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/barbershops",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"barbershops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Farrell creates barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response status code must be 201', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"    pm.expect(body.message).to.not.equals('')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have the created barbershop id', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    pm.expect(data).to.have.ownProperty('barbershopId')\r",
+											"    pm.expect(data.barbershopId).to.not.equals('')\r",
+											"    pm.environment.set('idBarbershopFarrell', data.barbershopId)\r",
+											"\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFarrell}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "latitude",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "longitude",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/barbershops",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"barbershops"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sky creates barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response status code must be 201', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response header should have Content-Type: application/json value', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response should be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties and values', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('message')\r",
+											"    pm.expect(body.message).to.not.equals('')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have the created barbershop id', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    pm.expect(data).to.have.ownProperty('barbershopId')\r",
+											"    pm.expect(data.barbershopId).to.not.equals('')\r",
+											"    pm.environment.set('idBarbershopSky', data.barbershopId)\r",
+											"\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenSky}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "latitude",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "longitude",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/barbershops",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"barbershops"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rizki, Rafli, Feri books appointments",
+					"item": [
+						{
+							"name": "Rizki books Felix's barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code must be 201 created', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body must be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have the appointment id just created', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    \r",
+											"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+											"    pm.expect(data.appointmentId).to.not.equals('')\r",
+											"\r",
+											"    pm.environment.set('idAppointmentRizki1', data.appointmentId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRizki}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schedule\": \"2023-06-10\",\r\n    \"message\": \"Rapiin aja ya bang\",\r\n    \"barbershopId\": \"{{idBarbershopFelix}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idRizki}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idRizki}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rizki books Farrell's barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code must be 201 created', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body must be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have the appointment id just created', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    \r",
+											"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+											"    pm.expect(data.appointmentId).to.not.equals('')\r",
+											"\r",
+											"    pm.environment.set('idAppointmentRizki2', data.appointmentId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRizki}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schedule\": \"2023-06-11\",\r\n    \"message\": \"Coba dibikin kece bang\",\r\n    \"barbershopId\": \"{{idBarbershopFarrell}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idRizki}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idRizki}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rizki books Sky's barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code must be 201 created', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body must be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have the appointment id just created', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    \r",
+											"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+											"    pm.expect(data.appointmentId).to.not.equals('')\r",
+											"\r",
+											"    pm.environment.set('idAppointmentRizki3', data.appointmentId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRizki}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schedule\": \"2023-06-12\",\r\n    \"message\": \"Dibikin tampan dan menawan bang\",\r\n    \"barbershopId\": \"{{idBarbershopSky}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idRizki}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idRizki}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli books Felix's barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code must be 201 created', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body must be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have the appointment id just created', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    \r",
+											"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+											"    pm.expect(data.appointmentId).to.not.equals('')\r",
+											"\r",
+											"    pm.environment.set('idAppointmentRafli1', data.appointmentId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRafli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schedule\": \"2023-06-10\",\r\n    \"message\": \"Om tolong dirapihin\",\r\n    \"barbershopId\": \"{{idBarbershopFelix}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idRafli}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idRafli}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli books Farrell's barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code must be 201 created', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body must be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have the appointment id just created', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    \r",
+											"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+											"    pm.expect(data.appointmentId).to.not.equals('')\r",
+											"\r",
+											"    pm.environment.set('idAppointmentRafli2', data.appointmentId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRafli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schedule\": \"2023-06-11\",\r\n    \"message\": \"Two block ya bang\",\r\n    \"barbershopId\": \"{{idBarbershopFarrell}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idRafli}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idRafli}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli books Sky's barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code must be 201 created', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body must be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have the appointment id just created', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    \r",
+											"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+											"    pm.expect(data.appointmentId).to.not.equals('')\r",
+											"\r",
+											"    pm.environment.set('idAppointmentRafli3', data.appointmentId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRafli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schedule\": \"2023-06-12\",\r\n    \"message\": \"Tolong bikin doi kagum\",\r\n    \"barbershopId\": \"{{idBarbershopSky}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idRafli}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idRafli}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri books Felix's barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code must be 201 created', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body must be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have the appointment id just created', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    \r",
+											"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+											"    pm.expect(data.appointmentId).to.not.equals('')\r",
+											"\r",
+											"    pm.environment.set('idAppointmentFeri1', data.appointmentId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFeri}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schedule\": \"2023-06-10\",\r\n    \"message\": \"Kak tolong dirapihin buat kuliah\",\r\n    \"barbershopId\": \"{{idBarbershopFelix}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idFeri}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idFeri}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri books Farrell's barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code must be 201 created', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body must be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have the appointment id just created', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    \r",
+											"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+											"    pm.expect(data.appointmentId).to.not.equals('')\r",
+											"\r",
+											"    pm.environment.set('idAppointmentFeri2', data.appointmentId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFeri}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schedule\": \"2023-06-11\",\r\n    \"message\": \"Pompadour bang\",\r\n    \"barbershopId\": \"{{idBarbershopFarrell}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idFeri}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idFeri}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri books Sky's barbershop",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response code must be 201 created', () => {\r",
+											"    pm.expect(pm.response).to.have.status(201)\r",
+											"})\r",
+											"\r",
+											"pm.test('Response headers must have Content-Type: application/json', () => {\r",
+											"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body must be an object', () => {\r",
+											"    const body = pm.response.json()\r",
+											"    pm.expect(body).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body should have correct properties', () => {\r",
+											"    const body = pm.response.json()\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('status')\r",
+											"    pm.expect(body.status).to.equals('success')\r",
+											"\r",
+											"    pm.expect(body).to.have.ownProperty('data')\r",
+											"    pm.expect(body.data).to.be.an('object')\r",
+											"})\r",
+											"\r",
+											"pm.test('Response body data should have the appointment id just created', () => {\r",
+											"    const { data } = pm.response.json()\r",
+											"    \r",
+											"    pm.expect(data).to.have.ownProperty('appointmentId')\r",
+											"    pm.expect(data.appointmentId).to.not.equals('')\r",
+											"\r",
+											"    pm.environment.set('idAppointmentFeri3', data.appointmentId)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFeri}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schedule\": \"2023-06-12\",\r\n    \"message\": \"Rapihin bang untuk interview kerja\",\r\n    \"barbershopId\": \"{{idBarbershopSky}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idFeri}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idFeri}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rizki, Rafli, Feri finish and review appointments",
+					"item": [
+						{
+							"name": "Rizki finish his Appointment 1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRizki}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idAppointmentRizki1}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idAppointmentRizki1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rizki finish his Appointment 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRizki}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idAppointmentRizki2}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idAppointmentRizki2}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rizki finish his Appointment 3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRizki}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idAppointmentRizki3}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idAppointmentRizki3}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli finish his Appointment 1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRafli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idAppointmentRafli1}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idAppointmentRafli1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli finish his Appointment 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRafli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idAppointmentRafli2}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idAppointmentRafli2}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli finish his Appointment 3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRafli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idAppointmentRafli3}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idAppointmentRafli3}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri finish his Appointment 1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFeri}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idAppointmentFeri1}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idAppointmentFeri1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri finish his Appointment 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFeri}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idAppointmentFeri2}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idAppointmentFeri2}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri finish his Appointment 3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFeri}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"action\": \"finish\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/{{idAppointmentFeri3}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"{{idAppointmentFeri3}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rizki review his Appointment 1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRizki}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stars\": 3,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentRizki1}}\",\r\n    \"userId\": \"{{idRizki}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rizki review his Appointment 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRizki}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stars\": 4,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentRizki2}}\",\r\n    \"userId\": \"{{idRizki}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rizki review his Appointment 3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRizki}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stars\": 5,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentRizki3}}\",\r\n    \"userId\": \"{{idRizki}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli review his Appointment 1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRafli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stars\": 5,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentRafli1}}\",\r\n    \"userId\": \"{{idRafli}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli review his Appointment 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRafli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stars\": 4,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentRafli2}}\",\r\n    \"userId\": \"{{idRafli}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rafli review his Appointment 3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenRafli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stars\": 3,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentRafli3}}\",\r\n    \"userId\": \"{{idRafli}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri review his Appointment 1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFeri}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stars\": 5,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentFeri1}}\",\r\n    \"userId\": \"{{idFeri}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri review his Appointment 2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFeri}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stars\": 4,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentFeri2}}\",\r\n    \"userId\": \"{{idFeri}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Feri review his Appointment 3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokenFeri}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stars\": 3,\r\n    \"message\": \"Boleh lah bang lumayan\",\r\n    \"appointmentId\": \"{{idAppointmentFeri3}}\",\r\n    \"userId\": \"{{idFeri}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Predict",
+			"item": [
+				{
+					"name": "Predict",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/felix/Downloads/IMG_20230612_131725.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://smartcut-ml-7vtyw4o77q-uc.a.run.app/detect-model",
+							"protocol": "https",
+							"host": [
+								"smartcut-ml-7vtyw4o77q-uc",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"detect-model"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test",
+			"item": [
+				{
+					"name": "Create User Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 201', () => {\r",
+									"    pm.expect(pm.response).to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have userId and it must not be empty', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"    pm.expect(data).to.have.ownProperty('userId')\r",
+									"    pm.expect(data.userId).to.not.equals('')\r",
+									"    pm.environment.set('idUserTest', data.userId)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Xamarin\",\r\n    \"username\": \"xamarin123\",\r\n    \"password\": \"secretpassword\",\r\n    \"email\": \"xamarin@gmail.com\",\r\n    \"phone\": \"6212356789123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Test Login Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response code should be 200', () => {\r",
+									"    pm.expect(pm.response).to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test('Response headers should have Content-Type application/json', () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.includes('application/json')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should be an object', () => {\r",
+									"    const body = pm.response.json()\r",
+									"    pm.expect(body).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body should have correct properties and values', () => {\r",
+									"    const body = pm.response.json()\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('status')\r",
+									"    pm.expect(body.status).to.equals('success')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('message')\r",
+									"\r",
+									"    pm.expect(body).to.have.ownProperty('data')\r",
+									"    pm.expect(body.data).to.be.an('object')\r",
+									"})\r",
+									"\r",
+									"pm.test('Response body data should have access token', () => {\r",
+									"    const { data } = pm.response.json()\r",
+									"\r",
+									"    pm.expect(data).to.have.ownProperty('token')\r",
+									"    pm.expect(data.token).to.not.equals('')\r",
+									"    pm.environment.set('tokenUserTest', data.token)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"xamarin123\",\r\n    \"password\":\"secretpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
